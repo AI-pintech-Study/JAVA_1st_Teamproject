@@ -2,7 +2,8 @@ package org.koreait.global;
 
 import org.koreait.global.libs.Utils;
 import org.koreait.main.controllers.LoginController;
-import org.koreait.main.controllers.MainController;
+import org.koreait.main.controllers.ProductBranchController;
+import org.koreait.member.entities.Accession;
 
 import java.util.function.Consumer;
 
@@ -156,9 +157,11 @@ public abstract class Controller {
                 System.exit(0);
             } else if (input.toUpperCase().equals("M") || input.equals("ㅡ")) {
                 // 입력 데이터가 M(대소문자 구분 없음)가 유입되면 메인 메뉴로 이동
-                Utils.loadController(MainController.class);
+                Utils.loadController(ProductBranchController.class);
             }
             else if (input.toUpperCase().equals("O") || input.equals("ㅐ")) {
+                Accession acc = BeanContainer.getBean(Accession.class);
+                acc.setLoginCheck(false);
                 Utils.loadController(LoginController.class);
             }
 

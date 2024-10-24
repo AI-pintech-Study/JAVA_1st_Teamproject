@@ -2,7 +2,7 @@ package org.koreait.global.libs;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.koreait.main.controllers.MainController;
+import org.koreait.main.controllers.ProductBranchController;
 import org.koreait.main.templates.MainMenu;
 
 public class UtilsTest {
@@ -15,7 +15,7 @@ public class UtilsTest {
     @Test
     @DisplayName("컨트롤러 실행 테스트")
     void loadControllerTest() {
-        MainController controller = Utils.loadController(MainController.class);
+        ProductBranchController controller = Utils.loadController(ProductBranchController.class);
         System.out.println(controller);
     }
 }

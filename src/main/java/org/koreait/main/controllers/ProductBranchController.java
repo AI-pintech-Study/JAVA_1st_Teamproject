@@ -11,9 +11,9 @@ import org.koreait.product.controllers.ProductListController;
  * 콘솔 프로그램 메인 컨트롤러
  *
  */
-public class MainController extends Controller {
+public class ProductBranchController extends Controller {
 
-    public MainController() {
+    public ProductBranchController() {
         /**
          * 사용자가 입력한 입력 데이터 수신 및 처리
          * - 사용자가 입력한 데이터의 처리는 컨트롤러마다 다를 수 있음, 따라서 사용자 정의 기능 형태(열린 기능)으로 접근합니다.

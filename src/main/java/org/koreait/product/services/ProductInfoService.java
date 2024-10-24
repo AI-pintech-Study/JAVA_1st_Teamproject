@@ -45,7 +45,7 @@ public class ProductInfoService {
                  ObjectInputStream oos = new ObjectInputStream(fis)) {
                 Map<Long, Product> data = (Map<Long, Product>)oos.readObject();
 
-                // ## 오름차순 내림차순 ㅊ ㅏㅁ고로만 보기
+                // ## 오름차순 내림차순 참고로만 보기
                 if (data != null && !data.isEmpty()) {
                     List<Product> items = data.values().stream().sorted((i1, i2) -> isDesc ? Long.valueOf(i1.getSeq()).compareTo(i2.getSeq()) : Long.valueOf(i2.getSeq()).compareTo(i1.getSeq())).toList();
                     return items;

@@ -2,8 +2,9 @@ package org.koreait.global;
 
 import org.koreait.global.exceptions.CommonException;
 import org.koreait.global.libs.Utils;
+import org.koreait.main.controllers.BranchController;
 import org.koreait.main.controllers.LoginController;
-import org.koreait.main.controllers.MainController;
+import org.koreait.member.entities.Accession;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.Scanner;
@@ -35,7 +36,9 @@ public class Router {
                 // ## C를 Load할때
                 // 상품을 조회하는 기능은 1개면 충분해서 싱글톤##
                 // 실행하면 가장 처음에 Main 화면이 처음에 나오도록 load ##
-                Utils.loadController(LoginController.class);
+                Accession acc = BeanContainer.getBean(Accession.class);
+                if(!acc.isLoginCheck()) Utils.loadController(LoginController.class);
+                else Utils.loadController(BranchController.class);
 
             } catch (Exception e) {
                 // 예외 공통 출력 처리 S

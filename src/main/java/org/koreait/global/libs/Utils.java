@@ -6,7 +6,7 @@ import org.koreait.global.Model;
 import org.koreait.global.Router;
 import org.koreait.global.exceptions.BadRequestException;
 import org.koreait.global.exceptions.CommonException;
-import org.koreait.main.controllers.MainController;
+import org.koreait.main.controllers.ProductBranchController;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -223,7 +223,7 @@ public class Utils {
 
         // 입력 문구가 대소문자 구분없이 M인 경우 메인 메뉴로 이동
         if (input.trim().toUpperCase().equals("M")) {
-            Utils.loadController(MainController.class);
+            Utils.loadController(ProductBranchController.class);
             return true;
         }
 

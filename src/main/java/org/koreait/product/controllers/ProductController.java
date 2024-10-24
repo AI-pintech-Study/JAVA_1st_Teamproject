@@ -49,7 +49,7 @@ public class ProductController extends Controller {
            // getBean(기능이기때문에 싱글톤으로 객체 생성) ##
            ProductSaveService saveService = BeanContainer.getBean(ProductSaveService.class);
            // ## save해서 상품 저장 ##
-           saveService.save(item);
+           saveService.save(item, false);
 
            System.out.println("상품이 저장되었습니다.");
            // 저장 이후에 상품 목록으로 페이지 이동
