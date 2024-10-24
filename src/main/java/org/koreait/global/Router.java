@@ -2,6 +2,7 @@ package org.koreait.global;
 
 import org.koreait.global.exceptions.CommonException;
 import org.koreait.global.libs.Utils;
+import org.koreait.main.controllers.LoginController;
 import org.koreait.main.controllers.MainController;
 
 import java.lang.reflect.InvocationTargetException;
@@ -34,7 +35,7 @@ public class Router {
                 // ## C를 Load할때
                 // 상품을 조회하는 기능은 1개면 충분해서 싱글톤##
                 // 실행하면 가장 처음에 Main 화면이 처음에 나오도록 load ##
-                Utils.loadController(MainController.class);
+                Utils.loadController(LoginController.class);
 
             } catch (Exception e) {
                 // 예외 공통 출력 처리 S

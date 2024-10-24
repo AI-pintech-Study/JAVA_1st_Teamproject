@@ -1,6 +1,7 @@
 package org.koreait.global;
 
 import org.koreait.global.libs.Utils;
+import org.koreait.main.controllers.LoginController;
 import org.koreait.main.controllers.MainController;
 
 import java.util.function.Consumer;
@@ -150,12 +151,15 @@ public abstract class Controller {
             // ## Q와 M은 언제든지 공통인 텍스트 ##
 
             // 입력 데이터 중 Q(대소문자 구분 없음)가 유입 되면 콘솔 프로그램 종료
-            if (input.toUpperCase().equals("Q")) {
+            if (input.toUpperCase().equals("Q") || input.equals("ㅂ")) {
                 System.out.println("종료합니다.");
                 System.exit(0);
-            } else if (input.toUpperCase().equals("M")) {
+            } else if (input.toUpperCase().equals("M") || input.equals("ㅡ")) {
                 // 입력 데이터가 M(대소문자 구분 없음)가 유입되면 메인 메뉴로 이동
                 Utils.loadController(MainController.class);
+            }
+            else if (input.toUpperCase().equals("O") || input.equals("ㅐ")) {
+                Utils.loadController(LoginController.class);
             }
 
             /**
