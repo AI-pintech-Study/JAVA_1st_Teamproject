@@ -18,10 +18,13 @@ public class Product implements Serializable {
 
     private LocalDateTime regDt; // 상품등록일시
     private LocalDateTime modDt; // 상품수정일시
+    private String fix;
 
     public long getSeq() {
         return seq;
     }
+
+    public void setFix(String fix) { this.fix = fix;}
 
     public void setSeq(long seq) {
         this.seq = seq;

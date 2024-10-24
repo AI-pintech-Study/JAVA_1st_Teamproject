@@ -7,6 +7,7 @@ import org.koreait.global.Router;
 import org.koreait.global.exceptions.BadRequestException;
 import org.koreait.global.exceptions.CommonException;
 import org.koreait.main.controllers.MainController;
+import org.koreait.product.controllers.ProductFixController;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -16,7 +17,7 @@ public class Utils {
     /**
      * 구분선 그리기
      *
-     * @param ch : 출력할 문자
+     * @param ch     : 출력할 문자
      * @param length : 출력할 갯수
      */
     public static void drawLine(char ch, int length) {
@@ -33,10 +34,10 @@ public class Utils {
 
     /**
      * 템플릿 출력
-     *
-     * Class 클래스는 클래스의 구성 요소의 정보도 조회하나 
-     *  reflection 기능, 즉 동적 객체 생성, 동적 메서드 호출, 또는 동적으로 멤버 변수의 값 접근 및 변경 가능합니다.
-     *  reflection 기능은 불특정 클래스로 부터 객체를 생성하거나 메서드를 호출할때 즉, 범용적인 접근을 할때 주로 사용할 수 있습니다.
+     * <p>
+     * Class 클래스는 클래스의 구성 요소의 정보도 조회하나
+     * reflection 기능, 즉 동적 객체 생성, 동적 메서드 호출, 또는 동적으로 멤버 변수의 값 접근 및 변경 가능합니다.
+     * reflection 기능은 불특정 클래스로 부터 객체를 생성하거나 메서드를 호출할때 즉, 범용적인 접근을 할때 주로 사용할 수 있습니다.
      *
      * @param clazz
      * @param <T>
@@ -58,17 +59,17 @@ public class Utils {
                 method.invoke(obj, model);
             }
 
-            return (T)obj;
+            return (T) obj;
         } catch (Exception e) {
             // ## 감싸진 예외 꺼내오기(get)
-           if (e instanceof InvocationTargetException targetException) {
-               Throwable throwable = targetException.getTargetException();
-               if (throwable instanceof CommonException commonException) {
-                   throw commonException;
-               }
-           }
+            if (e instanceof InvocationTargetException targetException) {
+                Throwable throwable = targetException.getTargetException();
+                if (throwable instanceof CommonException commonException) {
+                    throw commonException;
+                }
+            }
 
-           e.printStackTrace();
+            e.printStackTrace();
         }
 
         return null;
@@ -80,13 +81,13 @@ public class Utils {
 
     /**
      * 컨트롤러 실행
-     *
+     * <p>
      * 메뉴 컨트롤러는 여러개로 정의될 수 있으므로 Controller라는 클래스 공통 자료형을 통해 하나로 묶어 줄수 있음(다형성 활용)
      *
      * @param clazz
-     * @return
      * @param <T>
      * @param model : 전송할 데이터
+     * @return
      */
 
     // ## loadController (무슨 컨트롤러가 올지 모르니까 지네릭 메서드) ##
@@ -143,7 +144,7 @@ public class Utils {
     /**
      * 텍스트 입력 처리
      *
-     * @param title : 안내 문구
+     * @param title   : 안내 문구
      * @param message : 검증 실패시 안내 문구
      * @return
      */
@@ -152,7 +153,7 @@ public class Utils {
     // (매개변수들) 그때그때 상황맞게 쓸 수 있게 String title, String message
     public static String getString(String title, String message) {
         Scanner sc = Router.sc;
-        while(true) {
+        while (true) {
             try {
                 System.out.print(title + ": ");
                 String input = sc.nextLine();
@@ -173,10 +174,10 @@ public class Utils {
 
     /**
      * 숫자 입력 처리
-     *
+     * <p>
      * 1) 필수 여부 체크
      * 2) 숫자 형식 체크
-     * 
+     *
      * @param title
      * @param message
      * @return
@@ -184,7 +185,7 @@ public class Utils {
     public static int getNumber(String title, String message) {
 
         Scanner sc = Router.sc;
-        while(true) {
+        while (true) {
             try {
                 System.out.print(title + ": ");
                 String input = sc.nextLine();
@@ -235,4 +236,28 @@ public class Utils {
 
         return false;
     }
+
+    public static boolean getBoolean(String title, String message) {
+
+        Scanner sc = Router.sc;
+        while (true) {System.out.print(title + " (Y/N) ");
+                String input = sc.nextLine();
+
+                if (commonInputProcess(input, message)) {
+                    return false; // 메인 메뉴로 이동하거나 종료 시 false 반환
+                }
+
+                if (input.equalsIgnoreCase("Y")) {
+                    return true;
+                } else if (input.equalsIgnoreCase("N")) {
+                    return false;
+                } else {
+                    System.out.println("잘못된 입력입니다. Y 또는 N으로 입력하세요.");
+                }
+
+        }
+
+    }
 }
+
+

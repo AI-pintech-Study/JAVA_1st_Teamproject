@@ -2,12 +2,19 @@ package org.koreait.product.controllers;
 
 import org.koreait.global.BeanContainer;
 import org.koreait.global.Controller;
+import org.koreait.global.Model;
 import org.koreait.global.Router;
 import org.koreait.global.libs.Utils;
 import org.koreait.product.entities.Product;
 import org.koreait.product.services.ProductSaveService;
 import org.koreait.product.templates.ProductForm;
+import org.koreait.product.templates.ProductView;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.ObjectInputStream;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 /**
@@ -25,6 +32,31 @@ public class ProductController extends Controller {
            // ## 데이터 클래스 ##
            Scanner sc = Router.sc;
            Product item = new Product();
+
+           boolean isFix = Utils.getBoolean("상품을 수정하시겠습니까?", "(Y/N)");
+
+           if (isFix) {
+
+               Product File file = new File("products.obj");
+                   if (file.exists()) {
+                       try (FileInputStream fis = new FileInputStream(file);
+                            ObjectInputStream oos = new ObjectInputStream(fis)) {
+                           // ## 상품 목록을 Map형태로 가져옴
+                           Map<Long, Product> data = (Map<Long, Product>) oos.readObject();
+                           return data;
+                       } catch (Exception e) {}
+
+
+                   return new HashMap<>();
+               }
+               long seq = Utils.getNumber("수정 상품 번호", "상품 번호 입력");
+               ProductSaveService saveService = BeanContainer.getBean(ProductSaveService.class);
+               item = saveService.load().get(seq);
+               if (item == null) {
+                   System.out.println("해당 상품이 존재하지 않습니다.");
+                   return;
+               }
+           }
 
            // ## 함수형 인터페이스 3개(상품명 판매가 재고) 열린 개행 ##
 
@@ -49,7 +81,7 @@ public class ProductController extends Controller {
            // getBean(기능이기때문에 싱글톤으로 객체 생성) ##
            ProductSaveService saveService = BeanContainer.getBean(ProductSaveService.class);
            // ## save해서 상품 저장 ##
-           saveService.save(item);
+           saveService.save(item, false);
 
            System.out.println("상품이 저장되었습니다.");
            // 저장 이후에 상품 목록으로 페이지 이동
