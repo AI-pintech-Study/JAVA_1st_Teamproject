@@ -6,7 +6,10 @@ import org.koreait.global.Model;
 import org.koreait.global.Router;
 import org.koreait.global.exceptions.BadRequestException;
 import org.koreait.global.exceptions.CommonException;
+import org.koreait.main.controllers.LoginController;
 import org.koreait.main.controllers.ProductBranchController;
+import org.koreait.member.entities.Accession;
+import org.koreait.member.service.LoginInfoService;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -222,15 +225,37 @@ public class Utils {
         }
 
         // 입력 문구가 대소문자 구분없이 M인 경우 메인 메뉴로 이동
-        if (input.trim().toUpperCase().equals("M")) {
+        if (input.trim().toUpperCase().equals("M") || input.equals("ㅡ")) {
             Utils.loadController(ProductBranchController.class);
             return true;
         }
 
         // 입력 문구가 대소문자 구분없이 Q인 경우 프로그램 종료
-        if (input.trim().toUpperCase().equals("Q")) {
+        if (input.trim().toUpperCase().equals("Q")|| input.equals("ㅂ")) {
             System.out.println("종료합니다.");
             System.exit(1);
+        }
+
+        if (input.toUpperCase().equals("O") || input.equals("ㅐ")) {
+            Accession acc = BeanContainer.getBean(Accession.class);
+            acc.setLoginCheck(false);
+            Utils.loadController(LoginController.class);
+            return true;
+        }
+
+        return false;
+    }
+
+    public static boolean getIdCheck(String id, String password)
+    {
+        LoginInfoService loginInfoService = BeanContainer.getBean(LoginInfoService.class);
+        Accession checkItem = loginInfoService.get(id); // id가 있으면 그 객체 불러옴.
+        Accession checkLogin = BeanContainer.getBean(Accession.class); // 객체 복사를 위해 싱글톤패턴으로 생성
+
+        if (checkItem != null && checkItem.getUserPassword().equals(password)) {
+        checkLogin.copyFrom(checkItem); // ID가 맞다면 이 안에 객체 데이터 복사.
+        checkLogin.setLoginCheck(true); // Login 됬다고 알림
+            return true;
         }
 
         return false;

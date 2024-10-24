@@ -19,9 +19,6 @@ public class LoginCheckController extends Controller {
 
             String message = "잘못된 정보입니다.";
 
-            // ## 데이터 클래스 ##
-            LoginInfoService loginInfoService = BeanContainer.getBean(LoginInfoService.class);
-
             // ID
             String id = Utils.getString("ID", "ID를 입력하세요.");
 
@@ -31,11 +28,7 @@ public class LoginCheckController extends Controller {
             System.out.println("확인중입니다.");
 
             // 있는지 없는지 유효성 검사 ㄱㄱ
-            Accession checkItem = loginInfoService.get(id); // id가 있으면 그 객체 불러옴.
-            Accession checkLogin = BeanContainer.getBean(Accession.class); // 객체 복사를 위해 싱글톤패턴으로 생성
-            if (checkItem != null && checkItem.getUserPassword().equals(password)) {
-                checkLogin.copyFrom(checkItem); // ID가 맞다면 이 안에 객체 데이터 복사.
-                checkLogin.setLoginCheck(true); // Login 됬다고 알림.
+            if (Utils.getIdCheck(id,password)) {
                 Utils.loadController(BranchController.class);
             }
             else {
