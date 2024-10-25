@@ -22,7 +22,7 @@ public class ProductSaveService {
      */
 
     // ## SAVE만 담당!!!! ##
-    public void save(Product item, boolean fix) {
+    public void save(Product item) {
         File file = new File("products.obj");
         Map<Long, Product> data = load();
 
@@ -34,12 +34,10 @@ public class ProductSaveService {
 
         // ## seq가 있을 경우 상품 수정
 
-        if(fix)
-        {
-            if (data.containsKey(seq)) { // 상품 정보 수정
+
+        if (data.containsKey(seq)) { // 상품 정보 수정
                 item.setModDt(LocalDateTime.now());
             }
-        }
         else { // 상품 정보 등록
             item.setSeq(seq);
             item.setRegDt(LocalDateTime.now());
