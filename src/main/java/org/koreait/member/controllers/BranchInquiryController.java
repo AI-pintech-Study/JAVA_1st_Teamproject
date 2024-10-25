@@ -12,7 +12,7 @@ import org.koreait.member.templates.AccessionList;
 import java.util.List;
 
 public class BranchInquiryController extends Controller implements RequiredValidator  {// 유효성 검사를 통해 관리자 권한을 줘야함.
-    public BranchInquiryController() {
+    /*public BranchInquiryController() {
         LoginInfoService service = BeanContainer.getBean(LoginInfoService.class);
         setInputProcess(input ->{
             if (!check(input)) {
@@ -30,7 +30,7 @@ public class BranchInquiryController extends Controller implements RequiredValid
     @Override
     protected String getPromptText() {return "조회할 아이디를 입력하세요.";
 
-    }
+    }*/
 
     @Override
     public void view() {
@@ -39,8 +39,5 @@ public class BranchInquiryController extends Controller implements RequiredValid
         List<Accession> items = service.getList(true);
 
         Utils.loadTpl(AccessionList.class, new Model(items));
-
-
     }
 };
-
