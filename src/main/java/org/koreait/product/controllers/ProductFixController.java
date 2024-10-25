@@ -8,14 +8,12 @@ import org.koreait.global.libs.Utils;
 import org.koreait.product.entities.Product;
 import org.koreait.product.services.ProductInfoService;
 import org.koreait.product.templates.ProductList;
-import org.koreait.product.services.ProductFixService;
 
 import java.util.List;
 
 public class ProductFixController extends Controller {
     public ProductFixController()
     {
-        ProductFixService fixService = BeanContainer.getBean(ProductFixService.class);
         setPromptProcess(() -> {
             long seq = Utils.getNumber("상품번호", "상품번호를 입력하세요.");
             String confirm = Utils.getString("수정하시겠습니까?(Y/N)", "Y/N 둘중 입력 하세요.");

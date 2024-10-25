@@ -63,7 +63,7 @@ public class AccessionController extends Controller {
             ));
             item.setUserEmail(email);
 
-            int brith = Utils.getNumber("생년월일", "생년월일을 입력하세요.",List.of(
+            long brith = Utils.getNumber("생년월일", "생년월일을 입력하세요.",List.of(
                     input -> {
                         if (input.length() == 6) {
                             return true;

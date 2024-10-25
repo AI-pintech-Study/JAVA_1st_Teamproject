@@ -29,6 +29,13 @@ public class LoginSaveService {
         // ## ID 등록
         String id = item.getUserId();
 
+        if(id.toUpperCase().contains("ADMIN")) {
+            item.setUserAdmin(true);
+        }
+        else {
+            item.setUserAdmin(false);
+        }
+
         if(!fix) {
             if (service.get(id) == null) // 있는지 없는지 유효성 체크
             {

@@ -207,7 +207,7 @@ public class Utils {
      * @param message
      * @return
      */
-    public static int getNumber(String title, String message, List<Predicate<String>> conditions) {
+    public static long getNumber(String title, String message, List<Predicate<String>> conditions) {
 
         Scanner sc = Router.sc;
         String checkBitrh = "0";
@@ -247,10 +247,10 @@ public class Utils {
 
             return 0;
         }
-        return Integer.parseInt(checkBitrh);
+        return Long.parseLong(checkBitrh);
     }
 
-    public static int getNumber(String title, String message) {
+    public static long getNumber(String title, String message) {
         return getNumber(title, message, null);
     }
 

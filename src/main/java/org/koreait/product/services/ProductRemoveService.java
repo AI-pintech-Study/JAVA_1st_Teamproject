@@ -24,22 +24,20 @@ public class ProductRemoveService {
 
         // ## seq = 상품 등록 번호
         // ## seq가 없을경우 상품 생성
-        // if (seq < 1L) seq = System.currentTimeMillis();
 
         if (data.get(seq) != null) // 있는지 없는지 유효성 체크
         {
             data.remove(seq);
-
             try (FileOutputStream fos = new FileOutputStream(file);
                  ObjectOutputStream oos = new ObjectOutputStream(fos)) {
                 oos.writeObject(data);
+                return;
 
             } catch (IOException e) {}
+
         }
-        else
-        {
-            throw new BadRequestException();
-        }
+
+        throw new BadRequestException();
     }
 
     private Map<Long, Product> load() {

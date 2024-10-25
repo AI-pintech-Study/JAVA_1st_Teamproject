@@ -90,5 +90,6 @@ public class Accession implements Serializable {
         this.userEmail = other.userEmail;
         this.userBirth = other.userBirth;
         this.loginCheck = other.loginCheck;
+        this.userAdmin = other.userAdmin;
     }
 }

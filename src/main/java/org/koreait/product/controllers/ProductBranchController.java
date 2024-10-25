@@ -1,8 +1,10 @@
 package org.koreait.product.controllers;
 
+import org.koreait.global.BeanContainer;
 import org.koreait.global.Controller;
 import org.koreait.global.exceptions.BadRequestException;
 import org.koreait.global.libs.Utils;
+import org.koreait.member.entities.Accession;
 import org.koreait.product.templates.MainMenu;
 
 /**
@@ -25,23 +27,38 @@ public class ProductBranchController extends Controller {
             }
 
             // 메뉴 이동 처리 S
-            if (input.equals("1")) { // 상품 목록
-                Utils.loadController(ProductListController.class);
-
-            } else if (input.equals("2")) { // 상품 등록
-                Utils.loadController(ProductController.class);
-
-            } else if (input.equals("3")) { // 상품 삭제
-                Utils.loadController(ProductRemoveController.class);
-
-            }  else if (input.equals("4")) { // 상품 수정
-            Utils.loadController(ProductFixController.class);
+            Accession acc = BeanContainer.getBean(Accession.class);
+            if(!acc.isUserAdmin())
+            {
+                if (input.equals("1")) { // 상품 목록
+                    Utils.loadController(ProductListController.class);
+                }
+                else if (input.equals("2")) { // 상품 구매
+                    Utils.loadController(ProductBuyController.class);
+                }
+                else { // 그외 메뉴라면 없는 메뉴이므로 메뉴 선택 안내
+                    throw new BadRequestException("메뉴는 1, 2중 선택하세요.");
+                }
             }
-            else if (input.equals("5")) { // 상품 구매
-                Utils.loadController(ProductBuyController.class);
+            else {
+                if (input.equals("1")) { // 상품 목록
+                    Utils.loadController(ProductListController.class);
+                }
+                else if (input.equals("2")) { // 상품 구매
+                    Utils.loadController(ProductBuyController.class);
+                }
+                else if (input.equals("3")) { // 상품 삭제
+                    Utils.loadController(ProductRemoveController.class);
 
-            } else { // 그외 메뉴라면 없는 메뉴이므로 메뉴 선택 안내
-                throw new BadRequestException("메뉴는 1, 2, 3, 4, 5 중 선택하세요.");
+                }  else if (input.equals("4")) { // 상품 수정
+                    Utils.loadController(ProductFixController.class);
+                }
+                else if (input.equals("5")) { // 상품 등록
+                    Utils.loadController(ProductController.class);
+                }
+                else { // 그외 메뉴라면 없는 메뉴이므로 메뉴 선택 안내
+                    throw new BadRequestException("메뉴는 1, 2, 3, 4, 5 중 선택하세요.");
+                }
             }
             // 메뉴 이동 처리 E
         });

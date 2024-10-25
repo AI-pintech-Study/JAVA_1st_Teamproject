@@ -1,8 +1,10 @@
 package org.koreait.member.controllers;
 
+import org.koreait.global.BeanContainer;
 import org.koreait.global.Controller;
 import org.koreait.global.exceptions.BadRequestException;
 import org.koreait.global.libs.Utils;
+import org.koreait.member.entities.Accession;
 import org.koreait.member.templates.ManagementForm;
 
 public class ManagementController extends Controller {
@@ -24,8 +26,15 @@ public class ManagementController extends Controller {
                 Utils.loadController(MemberFixController.class);
             } else if (input.equals("2")) { // 회원 탈퇴
                 Utils.loadController(RemoveController.class);
-            } else if (input.equals("3")) {
-                Utils.loadController(BranchInquiryController.class); // 회원 조회 -> 이건 관리자 권한으로 나눠야함.
+            }
+
+            Accession acc = BeanContainer.getBean(Accession.class);
+
+
+            if(acc.isUserAdmin()) {
+                if (input.equals("3")) {
+                    Utils.loadController(BranchInquiryController.class); // 회원 조회 -> 이건 관리자 권한으로 나눠야함.
+                }
             }
             else { // 그외 메뉴라면 없는 메뉴이므로 메뉴 선택 안내
                 throw new BadRequestException("메뉴에 있는 메뉴 중 선택하세요.");
