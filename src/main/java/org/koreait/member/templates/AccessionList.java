@@ -7,7 +7,7 @@ import org.koreait.member.entities.Accession;
 
 import java.util.List;
 
-public class AccessionList implements Template {
+public class AccessionList implements Template { // 여기서 출력된 값 정확하게 나오도록 정리함.
 
     private List<Accession> infos;
 
