@@ -18,7 +18,6 @@ public class ProductController extends Controller {
 
     public ProductController() {
        setPromptProcess(() -> {
-
            // ## 공통적으로 선 긋기 ##
            Utils.drawLine('-', 30);
 
@@ -42,6 +41,13 @@ public class ProductController extends Controller {
            // 재고 입력하지 않으면 입력 요청 문구 나오게 예외 ##
            long stock = Utils.getNumber("재고", "재고를 입력하세요.");
            item.setStock((int)stock);
+           Product obj = (Product) getData();
+           long seq = 0;
+           if (obj == null) seq = System.currentTimeMillis();
+           else {
+               seq = obj.getSeq();
+           }
+           item.setSeq(seq);
 
            // 상품 정보 저장 처리
            // ## 처리할 수 있는 기능과 연결(중재)
