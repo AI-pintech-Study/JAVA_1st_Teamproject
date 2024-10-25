@@ -24,9 +24,11 @@ public class ProductBuyController extends Controller implements RequiredValidato
         setPromptProcess(() -> {
 
             long seq = Utils.getNumber("상품번호", "상품번호를 입력하세요.");
-            String count = Utils.getString("몇개를 사시겠습니까?", "숫자를 입력하세요");
-            if (count.) {
-                buyService.(seq);
+
+            int count = Integer.parseInt(Utils.getString("몇 개를 사시겠습니까?", "숫자를 입력하세요"));
+            if (count >= 0) {
+
+                buyService.buy(seq, count);
             }
             /* 유효성 검사 E */
 
@@ -44,7 +46,7 @@ public class ProductBuyController extends Controller implements RequiredValidato
     @Override
     protected String getPromptText() {
 
-        return "구매할 상품 번호를 입력하세요(메인메뉴: M, 종료: Q):";
+        return "구매할 상품 번호를 입력하세요(메인메뉴: M, 종료: Q)\n";
 
     }
 

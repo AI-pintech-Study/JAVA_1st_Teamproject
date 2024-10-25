@@ -18,10 +18,9 @@ public class ProductBuyService {
      */
 
     // ## SAVE만 담당!!!! ##
-    public void buy(long seq) {
+    public void buy(long seq, int count) {
         File file = new File("products.obj");
         Map<Long, Product> data = load();
-        data.get()
         // ## seq = 상품 등록 번호
 //        long seq = item.getSeq();
 
