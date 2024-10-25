@@ -11,6 +11,8 @@ public class Accession implements Serializable {
     private int userBirth;
     private boolean loginCheck;
 
+    private boolean userAdmin;
+
     public boolean isLoginCheck() {
         return loginCheck;
     }
@@ -21,6 +23,14 @@ public class Accession implements Serializable {
 
     public String getUserId() {
         return userId;
+    }
+
+    public boolean isUserAdmin() {
+        return userAdmin;
+    }
+
+    public void setUserAdmin(boolean userAdmin) {
+        this.userAdmin = userAdmin;
     }
 
     public void setUserId(String userId) {

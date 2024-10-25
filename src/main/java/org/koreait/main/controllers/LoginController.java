@@ -22,7 +22,6 @@ public class LoginController extends Controller {
             // 메뉴 이동 처리 S
             if (input.equals("1")) { // 로그인 창 띄우기
                 Utils.loadController(LoginCheckController.class); // LoginController 불러오기
-
             } else if (input.equals("2")) { // 회원가입 창 띄우기
                 Utils.loadController(AccessionController.class); // AccessionController 불러오기
             } else { // 그외 메뉴라면 없는 메뉴이므로 메뉴 선택 안내

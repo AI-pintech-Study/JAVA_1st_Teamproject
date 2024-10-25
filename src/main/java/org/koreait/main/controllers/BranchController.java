@@ -4,8 +4,8 @@ import org.koreait.global.Controller;
 import org.koreait.global.exceptions.BadRequestException;
 import org.koreait.global.libs.Utils;
 import org.koreait.main.templates.BranchMenu;
-import org.koreait.main.templates.LoginMenu;
-import org.koreait.main.templates.MainMenu;
+import org.koreait.member.controllers.ManagementController;
+import org.koreait.product.controllers.ProductBranchController;
 
 public class BranchController extends Controller {
     public BranchController() {
@@ -20,7 +20,7 @@ public class BranchController extends Controller {
                 Utils.loadController(ProductBranchController.class); // ProductBranchController 불러오기
 
             } else if (input.equals("2")) { // 회원관리
-                //Utils.loadController(AccessionController.class); // 회원관리 불러오기
+                Utils.loadController(ManagementController.class); // 회원관리 불러오기
             } else { // 그외 메뉴라면 없는 메뉴이므로 메뉴 선택 안내
                 throw new BadRequestException("메뉴는 1, 2 중 선택하세요.");
             }

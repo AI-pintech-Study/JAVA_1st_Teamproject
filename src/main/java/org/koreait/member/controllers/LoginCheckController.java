@@ -1,12 +1,8 @@
 package org.koreait.member.controllers;
-import org.koreait.global.BeanContainer;
 import org.koreait.global.Controller;
 import org.koreait.global.exceptions.BadRequestException;
 import org.koreait.global.libs.Utils;
 import org.koreait.main.controllers.BranchController;
-import org.koreait.main.controllers.ProductBranchController;
-import org.koreait.member.entities.Accession;
-import org.koreait.member.service.LoginInfoService;
 import org.koreait.member.templates.LoginForm;
 
 public class LoginCheckController extends Controller {
