@@ -7,12 +7,17 @@ import org.koreait.global.Router;
 import org.koreait.global.exceptions.BadRequestException;
 import org.koreait.global.exceptions.CommonException;
 import org.koreait.main.controllers.LoginController;
-import org.koreait.main.controllers.ProductBranchController;
+import org.koreait.product.controllers.ProductBranchController;
 import org.koreait.member.entities.Accession;
 import org.koreait.member.service.LoginInfoService;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.ObjectInputStream;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 public class Utils {
@@ -160,11 +165,9 @@ public class Utils {
                 System.out.print(title + ": ");
                 String input = sc.nextLine();
                 if (commonInputProcess(input, message)) {
-
                     // ## 검증 성공시 break 후 return input##
                     break;
                 }
-
                 return input;
 
             } catch (CommonException e) {
@@ -259,5 +262,24 @@ public class Utils {
         }
 
         return false;
+    }
+
+    /**
+     * 상품 정보 목록 파일에서 로드
+     *
+     * @return
+     */
+    public static Map<String, Accession> load() {
+        File file = new File("Accession.obj");
+        if (file.exists()) {
+            try (FileInputStream fis = new FileInputStream(file);
+                 ObjectInputStream oos = new ObjectInputStream(fis)) {
+                // ## 상품 목록을 Map형태로 가져옴
+                Map<String, Accession> data = (Map<String, Accession>) oos.readObject();
+                return data;
+            } catch (Exception e) {}
+        }
+
+        return new HashMap<>();
     }
 }

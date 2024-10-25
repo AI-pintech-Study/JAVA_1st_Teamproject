@@ -2,8 +2,8 @@ package org.koreait.global.libs;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.koreait.main.controllers.ProductBranchController;
-import org.koreait.main.templates.MainMenu;
+import org.koreait.product.controllers.ProductBranchController;
+import org.koreait.product.templates.MainMenu;
 
 public class UtilsTest {
     @Test

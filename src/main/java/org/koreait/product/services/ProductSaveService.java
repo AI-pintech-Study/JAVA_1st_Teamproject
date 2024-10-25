@@ -34,7 +34,7 @@ public class ProductSaveService {
 
         // ## seq가 있을 경우 상품 수정
 
-        if(fix)
+        if (fix)
         {
             if (data.containsKey(seq)) { // 상품 정보 수정
                 item.setModDt(LocalDateTime.now());

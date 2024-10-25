@@ -2,7 +2,7 @@ package org.koreait.global;
 
 import org.koreait.global.libs.Utils;
 import org.koreait.main.controllers.LoginController;
-import org.koreait.main.controllers.ProductBranchController;
+import org.koreait.product.controllers.ProductBranchController;
 import org.koreait.member.entities.Accession;
 
 import java.util.function.Consumer;

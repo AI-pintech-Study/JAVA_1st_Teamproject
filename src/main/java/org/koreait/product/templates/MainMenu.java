@@ -1,4 +1,4 @@
-package org.koreait.main.templates;
+package org.koreait.product.templates;
 
 import org.koreait.global.Template;
 

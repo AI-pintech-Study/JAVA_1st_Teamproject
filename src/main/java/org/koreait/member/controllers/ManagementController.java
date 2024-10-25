@@ -1,19 +1,15 @@
-package org.koreait.main.controllers;
+package org.koreait.member.controllers;
 
 import org.koreait.global.Controller;
 import org.koreait.global.exceptions.BadRequestException;
 import org.koreait.global.libs.Utils;
-import org.koreait.main.templates.MainMenu;
+import org.koreait.member.templates.ManagementForm;
 import org.koreait.product.controllers.ProductController;
 import org.koreait.product.controllers.ProductListController;
+import org.koreait.product.templates.MainMenu;
 
-/**
- * 콘솔 프로그램 메인 컨트롤러
- *
- */
-public class ProductBranchController extends Controller {
-
-    public ProductBranchController() {
+public class ManagementController extends Controller {
+    public ManagementController() {
         /**
          * 사용자가 입력한 입력 데이터 수신 및 처리
          * - 사용자가 입력한 데이터의 처리는 컨트롤러마다 다를 수 있음, 따라서 사용자 정의 기능 형태(열린 기능)으로 접근합니다.
@@ -27,13 +23,16 @@ public class ProductBranchController extends Controller {
             }
 
             // 메뉴 이동 처리 S
-            if (input.equals("1")) { // 상품 목록
-                Utils.loadController(ProductListController.class);
+            if (input.equals("1")) { // 회원 정보 수정
+                Utils.loadController(null);
 
-            } else if (input.equals("2")) { // 상품 등록
-                Utils.loadController(ProductController.class);
-            } else { // 그외 메뉴라면 없는 메뉴이므로 메뉴 선택 안내
-                throw new BadRequestException("메뉴는 1, 2 중 선택하세요.");
+            } else if (input.equals("2")) { // 회원 탈퇴
+                Utils.loadController(RemoveController.class);
+            } else if (input.equals("3")) {
+                Utils.loadController(null); // 회원 조회 -> 이건 관리자 권한으로 나눠야함.
+            }
+            else { // 그외 메뉴라면 없는 메뉴이므로 메뉴 선택 안내
+                throw new BadRequestException("메뉴에 있는 메뉴 중 선택하세요.");
             }
             // 메뉴 이동 처리 E
         });
@@ -42,8 +41,7 @@ public class ProductBranchController extends Controller {
     @Override
     public void view() {
         // 템플릿 출력
-        Utils.loadTpl(MainMenu.class);
+        Utils.loadTpl(ManagementForm.class);
     }
-
 
 }
