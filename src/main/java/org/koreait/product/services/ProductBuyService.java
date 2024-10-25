@@ -39,11 +39,14 @@ public class ProductBuyService {
 
 //            재고 불러와서 구매한 개수 빼기
             int stock =  product.getStock() - count;
-            product.setStock((int)stock);
+            product.setStock(stock);
 
             data.put(seq, product);
 
 
+            if (stock == 0) {
+                data.remove(seq);
+            }
 
             try (FileOutputStream fos = new FileOutputStream(file);
                  ObjectOutputStream oos = new ObjectOutputStream(fos)) {
