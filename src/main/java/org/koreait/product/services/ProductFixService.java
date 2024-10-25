@@ -7,7 +7,7 @@ import java.io.*;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ProductRemoveService {
+public class ProductFixService {
 
     /**
      * 사용자가 입력한 요청 데이터로 회원 정보(Product) 등록 및 수정 처리
@@ -17,7 +17,7 @@ public class ProductRemoveService {
      */
 
     // ## SAVE만 담당!!!! ##
-    public void remove(long seq) {
+    public void fix(Product item) {
         File file = new File("products.obj");
         Map<Long, Product> data = load(); // 회원 정보 가져오기 -> Map 형태. key = value
 
@@ -28,7 +28,7 @@ public class ProductRemoveService {
 
         if (data.get(seq) != null) // 있는지 없는지 유효성 체크
         {
-            data.remove(seq);
+            data.put(seq, );
 
             try (FileOutputStream fos = new FileOutputStream(file);
                  ObjectOutputStream oos = new ObjectOutputStream(fos)) {
