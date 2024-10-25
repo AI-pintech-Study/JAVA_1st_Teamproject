@@ -184,7 +184,9 @@ public class Utils {
      * @param message
      * @return
      */
-    public static int getNumber(String title, String message) {
+
+
+    public static long getNumber(String title, String message) {
 
         Scanner sc = Router.sc;
         while(true) {
@@ -194,7 +196,7 @@ public class Utils {
                 if (commonInputProcess(input, message)) { // 공통 입력 처리
                     break;
                 }
-                return Integer.parseInt(input);
+                return Long.parseLong(input);
             } catch (Exception e) {
 
                 // ## 내가 정한 예외면 정해둔 메시지 출력 ##

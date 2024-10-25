@@ -17,16 +17,14 @@ public class ProductRemoveService {
      */
 
     // ## SAVE만 담당!!!! ##
-    public void Remove(Product item) {
+    public void remove(long seq) {
         File file = new File("products.obj");
         Map<Long, Product> data = load(); // 회원 정보 가져오기 -> Map 형태. key = value
 
 
         // ## seq = 상품 등록 번호
-        long seq = item.getSeq();
-
         // ## seq가 없을경우 상품 생성
-        if (seq < 1L) seq = System.currentTimeMillis();
+        // if (seq < 1L) seq = System.currentTimeMillis();
 
         if (data.get(seq) != null) // 있는지 없는지 유효성 체크
         {

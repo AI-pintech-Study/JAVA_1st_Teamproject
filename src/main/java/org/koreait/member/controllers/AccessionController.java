@@ -31,7 +31,7 @@ public class AccessionController extends Controller {
             String email = Utils.getString("Email", "Email을 입력하세요.");
             item.setUserEmail(email);
 
-            int brith = Utils.getNumber("생년월일", "생년월일을 입력하세요.");
+            long brith = Utils.getNumber("생년월일", "생년월일을 입력하세요.");
             item.setUserBirth(brith);
 
             System.out.println("확인중입니다.");

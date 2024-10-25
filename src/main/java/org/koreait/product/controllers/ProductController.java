@@ -34,14 +34,14 @@ public class ProductController extends Controller {
 
            // 판매가
            // ## 형식 숫자인지 검증 ##
-           int price = Utils.getNumber("판매가", "판매가를 입력하세요.");
-           item.setPrice(price);
+           long price = Utils.getNumber("판매가", "판매가를 입력하세요.");
+           item.setPrice((int)price);
 
            // 재고
            // ## 형식 숫자인지 검증
            // 재고 입력하지 않으면 입력 요청 문구 나오게 예외 ##
-           int stock = Utils.getNumber("재고", "재고를 입력하세요.");
-           item.setStock(stock);
+           long stock = Utils.getNumber("재고", "재고를 입력하세요.");
+           item.setStock((int)stock);
 
            // 상품 정보 저장 처리
            // ## 처리할 수 있는 기능과 연결(중재)
