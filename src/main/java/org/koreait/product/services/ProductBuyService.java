@@ -1,6 +1,8 @@
 package org.koreait.product.services;
 
+import org.koreait.global.BeanContainer;
 import org.koreait.global.exceptions.BadRequestException;
+import org.koreait.member.entities.Accession;
 import org.koreait.product.entities.Product;
 
 import java.io.*;
@@ -18,7 +20,7 @@ public class ProductBuyService {
      */
 
     // ## SAVE만 담당!!!! ##
-    public void buy(long seq, int count) {
+    public void buy(long seq, Long count) {
         File file = new File("products.obj");
         Map<Long, Product> data = load();
         // ## seq = 상품 등록 번호
@@ -31,6 +33,15 @@ public class ProductBuyService {
 
 
         if (data.get(seq) != null) { // 상품 정보 수정
+
+            ProductInfoService service = BeanContainer.getBean(ProductInfoService.class);
+            Product product = service.get(seq);
+
+            long stock = (long) (product.getStock() - count);
+            product.setStock((int)stock);
+
+            data.put(seq, product);
+
 
 
             try (FileOutputStream fos = new FileOutputStream(file);

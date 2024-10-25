@@ -25,7 +25,7 @@ public class ProductBuyController extends Controller implements RequiredValidato
 
             long seq = Utils.getNumber("상품번호", "상품번호를 입력하세요.");
 
-            int count = Integer.parseInt(Utils.getString("몇 개를 사시겠습니까?", "숫자를 입력하세요"));
+            long count = Integer.parseInt(Utils.getString("몇 개를 사시겠습니까?", "숫자를 입력하세요"));
             if (count >= 0) {
 
                 buyService.buy(seq, count);
