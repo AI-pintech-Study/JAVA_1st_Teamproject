@@ -1,17 +1,13 @@
 package org.koreait.product.services;
 
-import org.koreait.global.BeanContainer;
 import org.koreait.global.exceptions.BadRequestException;
-import org.koreait.global.libs.Utils;
-import org.koreait.member.entities.Accession;
-import org.koreait.member.service.LoginInfoService;
 import org.koreait.product.entities.Product;
 
 import java.io.*;
 import java.util.HashMap;
 import java.util.Map;
 
-public class PruductRemoveService {
+public class ProductRemoveService {
 
     /**
      * 사용자가 입력한 요청 데이터로 회원 정보(Product) 등록 및 수정 처리

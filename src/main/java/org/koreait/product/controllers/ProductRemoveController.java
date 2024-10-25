@@ -6,8 +6,12 @@ import org.koreait.global.exceptions.BadRequestException;
 import org.koreait.global.libs.Utils;
 import org.koreait.main.controllers.LoginController;
 import org.koreait.member.entities.Accession;
-import org.koreait.member.service.LoginRemoveService;
-import org.koreait.member.templates.ProductRemoveForm;
+import org.koreait.product.entities.Product;
+import org.koreait.product.services.ProductRemoveService;
+import org.koreait.product.templates.ProductRemoveForm;
+import org.koreait.product.templates.ProductList;
+
+import java.util.List;
 
 public class ProductRemoveController extends Controller {
     public ProductRemoveController()
@@ -19,11 +23,11 @@ public class ProductRemoveController extends Controller {
             }
 
             // 메뉴 이동 처리 S
-            if (input.equals("1")) { // 탈퇴하시겠습니까? 문구.
+            if (input.equals("1")) { // 삭제하시겠습니까? 문구.
                 ProductRemoveService remove = BeanContainer.getBean(ProductRemoveService.class);
-                Accession acc = BeanContainer.getBean(Accession.class);
+                Product acc = BeanContainer.getBean(Product.class);
                 remove.Remove(acc);
-                Utils.loadController(LoginController.class);
+                Utils.loadController(ProductController.class);
             }
             else if (input.equals("2")) {
                 Utils.loadController(null);
@@ -33,6 +37,11 @@ public class ProductRemoveController extends Controller {
             }
             // 메뉴 이동 처리 E
         });
+    }
+
+    @Override
+    protected String getPromptText() {
+        return "삭제할 상품번호를 입력하세요(메인메뉴: M, 종료: Q):";
     }
 
     @Override
