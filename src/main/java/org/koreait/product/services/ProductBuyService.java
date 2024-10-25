@@ -20,7 +20,7 @@ public class ProductBuyService {
      */
 
     // ## SAVE만 담당!!!! ##
-    public void buy(long seq, Long count) {
+    public void buy(long seq, int count) {
         File file = new File("products.obj");
         Map<Long, Product> data = load();
         // ## seq = 상품 등록 번호
@@ -32,12 +32,13 @@ public class ProductBuyService {
         // ## seq가 있을 경우 상품 수정
 
 
-        if (data.get(seq) != null) { // 상품 정보 수정
+        if (data.get(seq) != null) { // 상품 구매
 
             ProductInfoService service = BeanContainer.getBean(ProductInfoService.class);
             Product product = service.get(seq);
 
-            long stock = (long) (product.getStock() - count);
+//            재고 불러와서 구매한 개수 빼기
+            int stock =  product.getStock() - count;
             product.setStock((int)stock);
 
             data.put(seq, product);
