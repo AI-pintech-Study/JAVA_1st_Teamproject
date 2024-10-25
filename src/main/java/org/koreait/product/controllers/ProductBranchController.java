@@ -30,8 +30,18 @@ public class ProductBranchController extends Controller {
 
             } else if (input.equals("2")) { // 상품 등록
                 Utils.loadController(ProductController.class);
+
+            } else if (input.equals("3")) { // 상품 삭제
+                Utils.loadController(ProductRemoveController.class);
+
+            }  else if (input.equals("4")) { // 상품 수정
+            Utils.loadController(ProductFixController.class);
+            }
+            else if (input.equals("5")) { // 상품 구매
+                Utils.loadController(ProductBuyController.class);
+
             } else { // 그외 메뉴라면 없는 메뉴이므로 메뉴 선택 안내
-                throw new BadRequestException("메뉴는 1, 2 중 선택하세요.");
+                throw new BadRequestException("메뉴는 1, 2, 3, 4, 5 중 선택하세요.");
             }
             // 메뉴 이동 처리 E
         });

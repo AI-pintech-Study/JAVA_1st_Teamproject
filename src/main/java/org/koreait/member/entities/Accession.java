@@ -4,11 +4,13 @@ import java.io.Serializable;
 
 public class Accession implements Serializable {
 
+    private final static long serialVersionUID = 1L;
+
     private String userId;
     private String userPassword;
     private String userName;
     private String userEmail;
-    private int userBirth;
+    private long userBirth;
     private boolean loginCheck;
 
     private boolean userAdmin;
@@ -61,11 +63,11 @@ public class Accession implements Serializable {
         this.userEmail = userEmail;
     }
 
-    public int getUserBirth() {
+    public long getUserBirth() {
         return userBirth;
     }
 
-    public void setUserBirth(int userBirth) {
+    public void setUserBirth(long userBirth) {
         this.userBirth = userBirth;
     }
 

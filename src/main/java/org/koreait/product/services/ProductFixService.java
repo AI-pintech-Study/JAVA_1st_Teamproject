@@ -3,7 +3,6 @@ package org.koreait.product.services;
 import org.koreait.product.entities.Product;
 
 import java.io.*;
-import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -11,7 +10,7 @@ import java.util.Map;
  * 상품 추가 및 저장 처리
  *
  */
-public class ProductSaveService {
+public class ProductFixService {
 
 
     /**
@@ -22,7 +21,7 @@ public class ProductSaveService {
      */
 
     // ## SAVE만 담당!!!! ##
-    public void save(Product item) {
+    public void fix(Product item) {
         File file = new File("products.obj");
         Map<Long, Product> data = load();
 
@@ -30,26 +29,24 @@ public class ProductSaveService {
         long seq = item.getSeq();
 
         // ## seq가 없을경우 상품 생성
-        if (seq < 1L) {
-            System.currentTimeMillis();
-        }
+        if (seq < 1L) seq = System.currentTimeMillis();
+
         // ## seq가 있을 경우 상품 수정
 
 
-
-        if (data.containsKey(seq)) { // 상품 정보 수정
-                item.setModDt(LocalDateTime.now());
-            }
-        else { // 상품 정보 등록
-            item.setSeq(seq);
-            item.setRegDt(LocalDateTime.now());
-        }
+//        if (data.containsKey(seq)) { // 상품 정보 수정
+//            item.setModDt(LocalDateTime.now());
+//        }
+//        else { // 상품 정보 등록
+//            item.setSeq(seq);
+//            item.setRegDt(LocalDateTime.now());
+//        }
 
         // ## seq가 있으면 수정될거고 있으면 생성될것
         data.put(seq, item);
 
         try (FileOutputStream fos = new FileOutputStream(file);
-            ObjectOutputStream oos = new ObjectOutputStream(fos)) {
+             ObjectOutputStream oos = new ObjectOutputStream(fos)) {
             oos.writeObject(data);
 
         } catch (IOException e) {}

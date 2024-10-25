@@ -18,7 +18,6 @@ public class ProductController extends Controller {
 
     public ProductController() {
        setPromptProcess(() -> {
-
            // ## 공통적으로 선 긋기 ##
            Utils.drawLine('-', 30);
 
@@ -33,14 +32,21 @@ public class ProductController extends Controller {
 
            // 판매가
            // ## 형식 숫자인지 검증 ##
-           int price = Utils.getNumber("판매가", "판매가를 입력하세요.");
-           item.setPrice(price);
+           long price = Utils.getNumber("판매가", "판매가를 입력하세요.");
+           item.setPrice((int)price);
 
            // 재고
            // ## 형식 숫자인지 검증
            // 재고 입력하지 않으면 입력 요청 문구 나오게 예외 ##
-           int stock = Utils.getNumber("재고", "재고를 입력하세요.");
-           item.setStock(stock);
+           long stock = Utils.getNumber("재고", "재고를 입력하세요.");
+           item.setStock((int)stock);
+           Product obj = (Product) getData();
+           long seq = 0;
+           if (obj == null) seq = System.currentTimeMillis();
+           else {
+               seq = obj.getSeq();
+           }
+           item.setSeq(seq);
 
            // 상품 정보 저장 처리
            // ## 처리할 수 있는 기능과 연결(중재)
@@ -48,7 +54,7 @@ public class ProductController extends Controller {
            // getBean(기능이기때문에 싱글톤으로 객체 생성) ##
            ProductSaveService saveService = BeanContainer.getBean(ProductSaveService.class);
            // ## save해서 상품 저장 ##
-           saveService.save(item, false);
+           saveService.save(item);
 
            System.out.println("상품이 저장되었습니다.");
            // 저장 이후에 상품 목록으로 페이지 이동
