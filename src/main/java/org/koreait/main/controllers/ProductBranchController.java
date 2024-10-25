@@ -4,6 +4,7 @@ import org.koreait.global.Controller;
 import org.koreait.global.exceptions.BadRequestException;
 import org.koreait.global.libs.Utils;
 import org.koreait.main.templates.MainMenu;
+import org.koreait.product.controllers.ProductBuyController;
 import org.koreait.product.controllers.ProductController;
 import org.koreait.product.controllers.ProductListController;
 import org.koreait.product.controllers.ProductRemoveController;
@@ -36,6 +37,8 @@ public class ProductBranchController extends Controller {
 
             } else if (input.equals("3")){ // 상품 삭제
                 Utils.loadController(ProductRemoveController.class);
+            } else if (input.equals("4")){ // 상품 구매
+                Utils.loadController(ProductBuyController.class);
             }
 
             else { // 그외 메뉴라면 없는 메뉴이므로 메뉴 선택 안내

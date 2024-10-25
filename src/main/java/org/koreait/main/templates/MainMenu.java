@@ -13,7 +13,8 @@ public class MainMenu implements Template {
         StringBuffer sb = new StringBuffer();
         sb.append("1. 상품목록\n")
                 .append("2. 상품등록\n")
-                        .append(("3. 상품삭제\n"));
+                        .append("3. 상품삭제\n")
+                            .append("4. 상품구매\n");
 
         System.out.println(sb);
     }
