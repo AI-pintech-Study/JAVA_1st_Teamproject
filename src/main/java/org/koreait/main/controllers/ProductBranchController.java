@@ -37,7 +37,7 @@ public class ProductBranchController extends Controller {
 
             } else if (input.equals("3")){ // 상품 삭제
                 Utils.loadController(ProductRemoveController.class);
-            } else if (input.equals("4")){ // 상품 구매
+            } else if (input.equals("5")){ // 상품 구매
                 Utils.loadController(ProductBuyController.class);
             }
 
