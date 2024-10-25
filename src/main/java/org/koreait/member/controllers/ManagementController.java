@@ -25,7 +25,7 @@ public class ManagementController extends Controller {
             } else if (input.equals("2")) { // 회원 탈퇴
                 Utils.loadController(RemoveController.class);
             } else if (input.equals("3")) {
-                Utils.loadController(null); // 회원 조회 -> 이건 관리자 권한으로 나눠야함.
+                Utils.loadController(BranchInquiryController.class); // 회원 조회 -> 이건 관리자 권한으로 나눠야함.
             }
             else { // 그외 메뉴라면 없는 메뉴이므로 메뉴 선택 안내
                 throw new BadRequestException("메뉴에 있는 메뉴 중 선택하세요.");

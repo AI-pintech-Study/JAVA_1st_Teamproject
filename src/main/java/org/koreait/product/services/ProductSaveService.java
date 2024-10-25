@@ -65,7 +65,7 @@ public class ProductSaveService {
         if (file.exists()) {
             try (FileInputStream fis = new FileInputStream(file);
                  ObjectInputStream oos = new ObjectInputStream(fis)) {
-                // ## 상품 목록을 Map형태로 가져옴
+                //  ## 상품 목록을 Map형태로 가져옴
                 Map<Long, Product> data = (Map<Long, Product>) oos.readObject();
                 return data;
             } catch (Exception e) {}
