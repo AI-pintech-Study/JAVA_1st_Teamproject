@@ -26,7 +26,7 @@ public class RemoveController extends Controller {
                 Utils.loadController(LoginController.class);
             }
             else if (input.equals("2")) {
-                Utils.loadController(null);
+                Utils.loadController(ManagementController.class);
             }
             else { // 그외 메뉴라면 없는 메뉴이므로 메뉴 선택 안내
                 throw new BadRequestException("메뉴에 있는 메뉴 중 선택하세요.");

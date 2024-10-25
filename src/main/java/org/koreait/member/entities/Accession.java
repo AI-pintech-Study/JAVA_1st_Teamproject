@@ -72,12 +72,12 @@ public class Accession implements Serializable {
     @Override
     public String toString() {
         return "Accession{" +
-                "userId='" + userId + '\'' +
-                ", userPassword='" + userPassword + '\'' +
-                ", userName='" + userName + '\'' +
-                ", userEmail='" + userEmail + '\'' +
-                ", userBirth=" + userBirth +
-                ", loginCheck=" + loginCheck +
+                "userId = '" + userId + '\'' +
+                ", userPassword = '" + userPassword + '\'' +
+                ", userName = '" + userName + '\'' +
+                ", userEmail = '" + userEmail + '\'' +
+                ", userBirth = " + userBirth +
+                ", userAdmin = " + userAdmin +
                 '}';
     }
 

@@ -41,8 +41,6 @@ public class ProductListController extends Controller implements TypeValidator, 
             // ## 유효성 검사 통과시 상품 데이터 넘겨줌
             // Model에 상품 번호를 Long값으로 넘겨줌 ##
            Utils.loadController(ProductViewController.class, new Model(Long.parseLong(input)));
-
-
         });
     }
 

@@ -20,7 +20,7 @@ public class LoginSaveService {
      */
 
     // ## SAVE만 담당!!!! ##
-    public void save(Accession item) {
+    public void save(Accession item, boolean fix) {
         File file = new File("Accession.obj");
         Map<String, Accession> data = Utils.load(); // 회원 정보 가져오기 -> Map 형태. key = value
 
@@ -29,20 +29,24 @@ public class LoginSaveService {
         // ## ID 등록
         String id = item.getUserId();
 
-        if (service.get(id) == null) // 있는지 없는지 유효성 체크
-        {
-            // ## seq가 있으면 수정될거고 있으면 생성될것
-            data.put(id, item);
-
-            try (FileOutputStream fos = new FileOutputStream(file);
-                 ObjectOutputStream oos = new ObjectOutputStream(fos)) {
-                oos.writeObject(data);
-
-            } catch (IOException e) {}
+        if(!fix) {
+            if (service.get(id) == null) // 있는지 없는지 유효성 체크
+            {
+                // ## seq가 있으면 수정될거고 있으면 생성될것
+                data.put(id, item);
+            } else {
+                throw new BadRequestException();
+            }
         }
-        else
-        {
-            throw new BadRequestException();
+        else {
+            data.put(id, item);
+        }
+
+        try (FileOutputStream fos = new FileOutputStream(file);
+             ObjectOutputStream oos = new ObjectOutputStream(fos)) {
+            oos.writeObject(data);
+
+        } catch (IOException e) {
         }
     }
 }

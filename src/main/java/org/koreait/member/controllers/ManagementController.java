@@ -4,9 +4,6 @@ import org.koreait.global.Controller;
 import org.koreait.global.exceptions.BadRequestException;
 import org.koreait.global.libs.Utils;
 import org.koreait.member.templates.ManagementForm;
-import org.koreait.product.controllers.ProductController;
-import org.koreait.product.controllers.ProductListController;
-import org.koreait.product.templates.MainMenu;
 
 public class ManagementController extends Controller {
     public ManagementController() {
@@ -24,8 +21,7 @@ public class ManagementController extends Controller {
 
             // 메뉴 이동 처리 S
             if (input.equals("1")) { // 회원 정보 수정
-                Utils.loadController(null);
-
+                Utils.loadController(MemberFixController.class);
             } else if (input.equals("2")) { // 회원 탈퇴
                 Utils.loadController(RemoveController.class);
             } else if (input.equals("3")) {

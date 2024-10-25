@@ -57,14 +57,14 @@ public class LoginInfoService {
 
     //region 사용할 일이 없을거같음
 
-//    /**
-//     * 기본 상품 목록 조회 (오름차순)
-//     *
-//     * @return
-//     */
-//    public List<Accession> getList() {
-//        return getList(false);
-//    }
+    /**
+     * 기본 상품 목록 조회 (오름차순)
+     *
+     * @return
+     */
+    public List<Accession> getList() {
+        return getList(false);
+    }
 
     //endregion
 }

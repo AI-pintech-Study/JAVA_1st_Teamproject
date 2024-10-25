@@ -17,8 +17,10 @@ import java.io.ObjectInputStream;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.function.Predicate;
 
 public class Utils {
     /**
@@ -158,23 +160,41 @@ public class Utils {
 
     // ## 검증 실패시 다시 입력하라고 무한 반복 while(true) ##
     // (매개변수들) 그때그때 상황맞게 쓸 수 있게 String title, String message
-    public static String getString(String title, String message) {
+    public static String getString(String title, String message, List<Predicate<String>> conditions) {
         Scanner sc = Router.sc;
+        String input;
         while(true) {
             try {
+                boolean isPass = true;
                 System.out.print(title + ": ");
-                String input = sc.nextLine();
+                input = sc.nextLine();
                 if (commonInputProcess(input, message)) {
                     // ## 검증 성공시 break 후 return input##
+                    isPass = false;
+                }
+
+               // 추가 조건 처리 S
+                if (conditions != null) {
+                    for (Predicate<String> predicate : conditions) {
+                        if (!predicate.test(input)) {
+                            isPass = false;
+                        }
+                    }
+                }
+                // 추가 조건 처리 E
+                if (isPass) {
                     break;
                 }
-                return input;
 
             } catch (CommonException e) {
                 System.out.println(e.getMessage());
             }
         }
-        return null;
+        return input;
+    }
+
+    public static String getString(String title, String message) {
+        return getString(title, message, null);
     }
 
     /**
@@ -187,17 +207,33 @@ public class Utils {
      * @param message
      * @return
      */
-    public static int getNumber(String title, String message) {
+    public static int getNumber(String title, String message, List<Predicate<String>> conditions) {
 
         Scanner sc = Router.sc;
-        while(true) {
+        String checkBitrh = "0";
+        while (true) {
             try {
+                boolean isPass = true;
                 System.out.print(title + ": ");
                 String input = sc.nextLine();
                 if (commonInputProcess(input, message)) { // 공통 입력 처리
+                    isPass = false;
+                }
+                if (conditions != null) {
+                    for (Predicate<String> predicate : conditions) {
+                        if (!predicate.test(input)) {
+                            isPass = false;
+                        }
+                    }
+                }
+                // 추가 조건 처리 E
+                if (isPass) {
+                    checkBitrh = input;
                     break;
                 }
-                return Integer.parseInt(input);
+                else {
+                    continue;
+                }
             } catch (Exception e) {
 
                 // ## 내가 정한 예외면 정해둔 메시지 출력 ##
@@ -208,9 +244,14 @@ public class Utils {
                     System.out.println("숫자 형식으로 입력하세요.");
                 }
             }
-        }
 
-        return 0;
+            return 0;
+        }
+        return Integer.parseInt(checkBitrh);
+    }
+
+    public static int getNumber(String title, String message) {
+        return getNumber(title, message, null);
     }
 
     /**
@@ -229,9 +270,12 @@ public class Utils {
 
         // 입력 문구가 대소문자 구분없이 M인 경우 메인 메뉴로 이동
         if (input.trim().toUpperCase().equals("M") || input.equals("ㅡ")) {
-            Utils.loadController(ProductBranchController.class);
+            Accession acc = BeanContainer.getBean(Accession.class);
+            if (acc.isLoginCheck()) Utils.loadController(ProductBranchController.class);
+            else Utils.loadController(LoginController.class);
             return true;
         }
+
 
         // 입력 문구가 대소문자 구분없이 Q인 경우 프로그램 종료
         if (input.trim().toUpperCase().equals("Q")|| input.equals("ㅂ")) {
