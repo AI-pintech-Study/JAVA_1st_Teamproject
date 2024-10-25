@@ -1,18 +1,20 @@
 package org.koreait.product.services;
 
+import org.koreait.global.Controller;
 import org.koreait.product.entities.Product;
 
+import java.beans.PropertyEditor;
 import java.io.*;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
+import org.koreait.global.Model;
 
 /**
  * 상품 추가 및 저장 처리
  *
  */
 public class ProductSaveService {
-
 
     /**
      * 사용자가 입력한 요청 데이터로 상품 정보(Product) 등록 및 수정 처리
@@ -30,9 +32,11 @@ public class ProductSaveService {
         long seq = item.getSeq();
 
         // ## seq가 없을경우 상품 생성
-        if (seq < 1L) seq = System.currentTimeMillis();
-
+        if (seq < 1L) {
+            System.currentTimeMillis();
+        }
         // ## seq가 있을 경우 상품 수정
+
 
 
         if (data.containsKey(seq)) { // 상품 정보 수정

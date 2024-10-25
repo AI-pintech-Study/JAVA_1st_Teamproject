@@ -3,7 +3,6 @@ package org.koreait.product.services;
 import org.koreait.product.entities.Product;
 
 import java.io.*;
-import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -71,5 +70,4 @@ public class ProductFixService {
 
         return new HashMap<>();
     }
-
 }

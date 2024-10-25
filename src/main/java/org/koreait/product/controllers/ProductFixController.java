@@ -8,6 +8,7 @@ import org.koreait.main.controllers.ProductBranchController;
 import org.koreait.product.entities.Product;
 import org.koreait.product.services.ProductFixService;
 import org.koreait.product.services.ProductInfoService;
+import org.koreait.product.services.ProductSaveService;
 import org.koreait.product.templates.ProductList;
 
 import java.util.List;
@@ -19,13 +20,17 @@ public class ProductFixController extends Controller {
         setPromptProcess(() -> {
             long seq = Utils.getNumber("상품번호", "상품번호를 입력하세요.");
             String confirm = Utils.getString("수정하시겠습니까?(Y/N)", "Y/N 둘중 입력 하세요.");
+
+            ProductInfoService service = BeanContainer.getBean(ProductInfoService.class);
+            Product item = service.get(seq);
+
             if (confirm.toUpperCase().equals("Y")) {
-                fixService.fix(getClass());
+                Utils.loadController(ProductModifyController.class, new Model(item));
             }
-
-            // 수정 완료 후 상품 메인메뉴 이동
-            Utils.loadController(ProductBranchController.class);
-
+            else {
+                // 삭제 완료 후 상품 메인메뉴 이동
+                Utils.loadController(ProductBranchController.class);
+            }
 
 
         });
