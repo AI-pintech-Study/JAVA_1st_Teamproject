@@ -20,10 +20,10 @@ public class ProductFixController extends Controller {
             long seq = Utils.getNumber("상품번호", "상품번호를 입력하세요.");
             String confirm = Utils.getString("수정하시겠습니까?(Y/N)", "Y/N 둘중 입력 하세요.");
             if (confirm.toUpperCase().equals("Y")) {
-                fixService.fix();
+                fixService.fix(getClass());
             }
 
-            // 삭제 완료 후 상품 메인메뉴 이동
+            // 수정 완료 후 상품 메인메뉴 이동
             Utils.loadController(ProductBranchController.class);
 
 
