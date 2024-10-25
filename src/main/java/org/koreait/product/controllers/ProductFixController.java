@@ -8,6 +8,7 @@ import org.koreait.global.libs.Utils;
 import org.koreait.product.entities.Product;
 import org.koreait.product.services.ProductInfoService;
 import org.koreait.product.templates.ProductList;
+import org.koreait.product.services.ProductFixService;
 
 import java.util.List;
 
