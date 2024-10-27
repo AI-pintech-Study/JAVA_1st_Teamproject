@@ -60,9 +60,9 @@ public class MemberFixController extends Controller implements TypeValidator, Re
     // 단 기능이므로 여러개 있을 필요 없어 싱글톤(getBean) ##
     public void view() {
         LoginInfoService service = BeanContainer.getBean(LoginInfoService.class); // LoginInfo 객체 가져오기 -> 싱글톤
-        Accession checkId = BeanContainer.getBean(Accession.class);
+        Accession checkId = BeanContainer.getBean(Accession.class); // 회원정보도 불러오기
 
-        Accession items = service.get(checkId.getUserId());
-        Utils.loadTpl(MemberFixForm.class, new Model(items));
+        Accession items = service.get(checkId.getUserId()); // 아이디가 있는지 없는지 체크하는 목록. 아이디가 없으면 null로 출력.
+        Utils.loadTpl(MemberFixForm.class, new Model(items)); // MemberFixForm 불러오기. 데이터도 같이 넣어줌.
     }
 }

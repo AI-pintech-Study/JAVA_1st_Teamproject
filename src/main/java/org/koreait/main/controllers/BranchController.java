@@ -18,7 +18,6 @@ public class BranchController extends Controller {
             // 메뉴 이동 처리 S
             if (input.equals("1")) { // 상품관리
                 Utils.loadController(ProductBranchController.class); // ProductBranchController 불러오기
-
             } else if (input.equals("2")) { // 회원관리
                 Utils.loadController(ManagementController.class); // 회원관리 불러오기
             } else { // 그외 메뉴라면 없는 메뉴이므로 메뉴 선택 안내

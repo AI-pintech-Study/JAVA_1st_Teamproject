@@ -29,29 +29,29 @@ public class LoginSaveService {
         // ## ID 등록
         String id = item.getUserId();
 
-        if(id.toUpperCase().contains("ADMIN")) {
+        if(id.toUpperCase().contains("ADMIN")) { // 저장 할 당시에 admin 이라는 이름이 있으면 그 해당 회원 객체에 관리자 권한을 ture시킴.
             item.setUserAdmin(true);
         }
         else {
             item.setUserAdmin(false);
         }
 
-        if(!fix) {
+        if(!fix) { // 수정 안할 때.
             if (service.get(id) == null) // 있는지 없는지 유효성 체크
             {
-                // ## seq가 있으면 수정될거고 있으면 생성될것
+                // ID가 있으면 put으로 key == value 시켜줌.
                 data.put(id, item);
-            } else {
+            } else { // 없으면 바로 예외처리
                 throw new BadRequestException();
             }
         }
-        else {
+        else { // 수정할 때
             data.put(id, item);
         }
 
         try (FileOutputStream fos = new FileOutputStream(file);
              ObjectOutputStream oos = new ObjectOutputStream(fos)) {
-            oos.writeObject(data);
+            oos.writeObject(data); //  이후 저장.
 
         } catch (IOException e) {
         }

@@ -6,6 +6,7 @@ import org.koreait.global.Router;
 import org.koreait.global.libs.Utils;
 import org.koreait.product.entities.Product;
 import org.koreait.product.services.ProductSaveService;
+import org.koreait.product.templates.ProductModifyForm;
 
 import java.util.Scanner;
 
@@ -68,6 +69,6 @@ public class ProductModifyController extends Controller {
 
     @Override
     public void view() {
-        //Utils.loadTpl(ProductModifyForm.class);
+        Utils.loadTpl(ProductModifyForm.class);
     }
 }

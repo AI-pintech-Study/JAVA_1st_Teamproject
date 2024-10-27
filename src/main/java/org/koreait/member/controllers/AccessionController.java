@@ -21,7 +21,8 @@ public class AccessionController extends Controller {
             // ## 데이터 클래스 ##
             Accession item = new Accession();
 
-            String id = Utils.getString("ID", "ID를 입력하세요.", List.of(
+            // ID 입력
+            String id = Utils.getString("ID", "ID를 입력하세요.", List.of( // ID의 제약조건
                     input -> {
                          if (input.length() >= 5 && input.length() <= 20) {
                              return true;
@@ -33,7 +34,8 @@ public class AccessionController extends Controller {
             ));
             item.setUserId(id);
 
-            String password = Utils.getString("비밀번호", "비밀번호를 입력하세요.", List.of(
+            // Password 입력.
+            String password = Utils.getString("비밀번호", "비밀번호를 입력하세요.", List.of( // 패스워드의 제약조건
                     input -> {
                         if (input.length() >= 8 && input.length() <= 20) {
                             return true;
@@ -43,11 +45,13 @@ public class AccessionController extends Controller {
                     }
             ));
             item.setUserPassword(password);
-
+            
+            // 이름 입력
             String name = Utils.getString("이름", "이름을 입력하세요.");
             item.setUserName(name);
 
-            String email = Utils.getString("Email", "Email을 입력하세요.", List.of(
+            // 이메일 입력.
+            String email = Utils.getString("Email", "Email을 입력하세요.", List.of( // 이메일의 제약조건 
                     input -> {
                         String CheckEmail;
                         if(input.contains("@")) {
@@ -63,7 +67,8 @@ public class AccessionController extends Controller {
             ));
             item.setUserEmail(email);
 
-            long brith = Utils.getNumber("생년월일", "생년월일을 입력하세요.",List.of(
+            // 생년월일 입력
+            long brith = Utils.getNumber("생년월일", "생년월일을 입력하세요.",List.of( // 생년월일의 제약조건
                     input -> {
                         if (input.length() == 6) {
                             return true;
@@ -77,10 +82,10 @@ public class AccessionController extends Controller {
             System.out.println("확인중입니다.");
             // 저장 이후에 상품 목록으로 페이지 이동
 
-            LoginSaveService saveService = BeanContainer.getBean(LoginSaveService.class);
-            saveService.save(item, false);
+            LoginSaveService saveService = BeanContainer.getBean(LoginSaveService.class); // 싱글톤패턴으로 saveService 불러오기.
+            saveService.save(item, false); // 바로 Save.
 
-            // ## 작업 끝난후 다시 상품목록(List)으로 이동 시켜줌 ##
+            // ## 작업 끝난후 다시 Login항목으로 이동 시켜줌 ##
             Utils.loadController(LoginController.class);
         });
     }
