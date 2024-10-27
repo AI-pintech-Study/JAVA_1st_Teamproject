@@ -13,24 +13,11 @@ import java.util.Map;
 
 public class ProductBuyService {
 
-    /**
-     * 사용자가 입력한 요청 데이터로 상품 정보(Product) 등록 및 수정 처리
-     * 요청 데이터 중에서 등록번호가 있다면 수정, 없다면 추가로 판단
-     *
-     * @param seq count
-     */
 
-    // ## SAVE만 담당!!!! ##
+    // Buy만 담당
     public void buy(long seq, int count) {
         File file = new File("products.obj");
         Map<Long, Product> data = Utils.load("products.obj");
-        // ## seq = 상품 등록 번호
-//        long seq = item.getSeq();
-
-        // ## seq가 없을경우 상품 생성
-//        if (seq < 1L) seq = System.currentTimeMillis();
-
-        // ## seq가 있을 경우 상품 수정
 
 
         if (data.get(seq) != null) { // 상품 구매
@@ -38,13 +25,17 @@ public class ProductBuyService {
             ProductInfoService service = BeanContainer.getBean(ProductInfoService.class);
             Product product = service.get(seq);
 
-//            재고 불러와서 구매한 개수 빼기
+            // 재고 get해와서 구매 개수 빼기 연산 한후 바로 새 변수(stock) 선언과 동시에 값 초기화
             int stock =  product.getStock() - count;
+
+            // 연산한 새 재고 값을 새로 set
             product.setStock(stock);
 
+            // data에 최종적으로 값 put
             data.put(seq, product);
 
 
+            // 재고가 0이 될경우 상품 삭제
             if (stock == 0) {
                 data.remove(seq);
             }
@@ -56,12 +47,8 @@ public class ProductBuyService {
             } catch (IOException e) {}
 
         }
-        else { // 상품 정보 등록
+        else {
             throw new BadRequestException();
         }
-
-
-
     }
-
 }

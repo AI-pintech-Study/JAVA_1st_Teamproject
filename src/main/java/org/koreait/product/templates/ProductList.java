@@ -16,7 +16,7 @@ public class ProductList implements Template {
 
     private List<Product> items;
 
-    // ## 출력 담당하는 view ##
+    // 출력 담당하는 view
     @Override
     public void print() {
         System.out.println("상품목록");
@@ -33,7 +33,7 @@ public class ProductList implements Template {
     }
 
     @Override
-    // ## Tempalte에 넘길 데이터가 있을때 model로 보내서 print() ##
+    // Tempalte에 넘길 데이터가 있을때 model로 보내서 print() 재정의
     public void print(Model model) {
         Object data = model.getData();
         if (data != null) {

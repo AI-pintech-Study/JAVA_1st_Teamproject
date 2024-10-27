@@ -28,9 +28,11 @@ public class ProductBranchController extends Controller {
 
             // 메뉴 이동 처리 S
             Accession acc = BeanContainer.getBean(Accession.class);
+
+            // 관리자 아이디(isUserAdmin)가 아닐경우 접근 가능한 권한 ksw
             if(!acc.isUserAdmin())
             {
-                if (input.equals("1")) { // 상품 목록
+                if (input.equals("1")) { // 상품 목록 조회
                     Utils.loadController(ProductListController.class);
                 }
                 else if (input.equals("2")) { // 상품 구매
@@ -40,8 +42,10 @@ public class ProductBranchController extends Controller {
                     throw new BadRequestException("메뉴는 1, 2중 선택하세요.");
                 }
             }
+
+            // 관리자 아이디(isUserAdmin)가 맞을경우 접근 가능한 권한 ksw
             else {
-                if (input.equals("1")) { // 상품 목록
+                if (input.equals("1")) { // 상품 목록 조회
                     Utils.loadController(ProductListController.class);
                 }
                 else if (input.equals("2")) { // 상품 구매

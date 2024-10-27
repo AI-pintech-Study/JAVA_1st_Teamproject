@@ -15,7 +15,7 @@ public class Product implements Serializable {
     private String name; // 상품이름
     private int price; // 판매가
     private int stock; // 재고
-    private int buy; //구매
+    private int buy; // 구매
 
     private LocalDateTime regDt; // 상품등록일시
     private LocalDateTime modDt; // 상품수정일시
@@ -76,6 +76,7 @@ public class Product implements Serializable {
         this.regDt = regDt;
     }
 
+    // toString 재정의
     @Override
     public String toString() {
         return "Product{" +

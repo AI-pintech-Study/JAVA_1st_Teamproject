@@ -20,16 +20,16 @@ import java.util.List;
 public class ProductListController extends Controller implements TypeValidator, RequiredValidator {
     public ProductListController() {
 
-        // ## 사용자 요청 input
+        // 사용자 요청 input
         // 한개의 값 비교
-        // 값 1개 들어옴(input) 나가는 값(output) 없음 ##
+        // 값 1개 들어옴(input) 나가는 값(output) 없음
         setInputProcess(input -> {
             /* 유효성 검사 S */
             if (!check(input)) { // 필수 항목 체크
                 return;
             }
 
-            // ## 숫자 체크 ##
+            // 숫자 여부 유효성 체크
             if (!isNumber(input)) {
                 System.out.println("상품 번호는 숫자만 입력하세요.");
                 return;
@@ -37,9 +37,9 @@ public class ProductListController extends Controller implements TypeValidator, 
 
             /* 유효성 검사 E */
 
-            // 선택한 상품 번호와 함께 상품 상세로 이동
-            // ## 유효성 검사 통과시 상품 데이터 넘겨줌
-            // Model에 상품 번호를 Long값으로 넘겨줌 ##
+            // 선택한 상품 번호(Medel)와 함께 상품 상세로 이동
+            // 유효성 검사 통과시 상품 데이터 넘겨줌
+            // Model에 상품 번호를 Long값으로 넘겨줌 ksw
            Utils.loadController(ProductViewController.class, new Model(Long.parseLong(input)));
         });
     }
@@ -51,15 +51,15 @@ public class ProductListController extends Controller implements TypeValidator, 
 
     @Override
 
-    // ## 요청받은 상품 목록 데이터 출력으로 오버라이딩
-    // 단 기능이므로 여러개 있을 필요 없어 싱글톤(getBean) ##
+    // view 추상 메서드를 요청받은 상품 목록 데이터 출력으로 오버라이딩
+    // 단 기능이므로 여러개 있을 필요 없어 싱글톤(getBean) ksw
     public void view() {
         ProductInfoService service = BeanContainer.getBean(ProductInfoService.class);
         List<Product> items = service.getList();
 
         // 템플릿 로드 및 상품 목록 데이터 전송
-        // ## 바로 위의 컨트롤러에서 넘겨준 데이터(items)
-        // ProductList라는 View 템플릿이 출력해줌 ##
+        // 바로 위의 컨트롤러에서 넘겨준 데이터(items)
+        // ProductList라는 View 템플릿이 출력해줌 ksw
         Utils.loadTpl(ProductList.class, new Model(items));
     }
 }

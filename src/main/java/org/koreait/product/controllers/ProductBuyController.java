@@ -30,15 +30,7 @@ public class ProductBuyController extends Controller implements RequiredValidato
 
                 buyService.buy(seq, count);
             }
-            /* 유효성 검사 E */
-
-            // 선택한 상품 번호와 함께 상품 상세로 이동
-            // ## 유효성 검사 통과시 상품 데이터 넘겨줌
-            // Model에 상품 번호를 Long값으로 넘겨줌 ##
-
-//            item.setBuy(buy);
-
-            // ## 작업 끝난후 다시 상품목록(List)으로 이동 시켜줌 ##
+            // 작업 끝난후 다시 상품목록(List)으로 이동
             Utils.loadController(ProductListController.class);
         });
     }

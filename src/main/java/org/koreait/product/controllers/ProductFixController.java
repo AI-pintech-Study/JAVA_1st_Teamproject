@@ -21,42 +21,17 @@ public class ProductFixController extends Controller {
             ProductInfoService service = BeanContainer.getBean(ProductInfoService.class);
             Product item = service.get(seq);
 
+            // 수정하겠다(Y) 선택시 item값 가지고 수정 컨트롤러로 이동 ksw
             if (confirm.toUpperCase().equals("Y")) {
                 Utils.loadController(ProductModifyController.class, new Model(item));
             }
             else {
-                // 삭제 완료 후 상품 메인메뉴 이동
+                // 다시 상품 메인메뉴로 이동
                 Utils.loadController(ProductBranchController.class);
             }
 
 
         });
-        /*
-        setInputProcess(input -> {
-            // 메인 메뉴 사용자 입력 처리
-            if (input == null || input.isBlank()) { // 입력이 없다면 함수 종료
-                return;
-            }
-
-            Utils.loadController(ProductListController.class);
-
-            // 메뉴 이동 처리 S
-            if (input.equals("1")) { // 삭제하시겠습니까? 문구.
-                ProductFixServiceService remove = BeanContainer.getBean(ProductFixServiceService.class);
-                Product acc = BeanContainer.getBean(Product.class);
-                ProductFixService(acc);
-                Utils.loadController(ProductController.class);
-            }
-            else if (input.equals("2")) {
-                Utils.loadController(null);
-            }
-            else { // 그외 메뉴라면 없는 메뉴이므로 메뉴 선택 안내
-                throw new BadRequestException("메뉴에 있는 메뉴 중 선택하세요.");
-            }
-            // 메뉴 이동 처리 E
-        });
-
-         */
     }
 
     @Override
