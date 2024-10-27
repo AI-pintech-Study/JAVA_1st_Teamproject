@@ -46,7 +46,7 @@ public class ProductModifyController extends Controller {
             // 처리할 수 있는 기능과 연결(중재)
             // getBean(기능이기때문에 싱글톤으로 객체 생성)
             ProductSaveService saveService = BeanContainer.getBean(ProductSaveService.class);
-            // ## save해서 상품 저장 ##
+            // save해서 상품 저장
             saveService.save(item);
 
             System.out.println("상품이 저장되었습니다.");
