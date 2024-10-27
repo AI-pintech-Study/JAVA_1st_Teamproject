@@ -1,5 +1,6 @@
 package org.koreait.product.services;
 
+import org.koreait.global.libs.Utils;
 import org.koreait.product.entities.Product;
 
 import java.io.*;
@@ -23,7 +24,7 @@ public class ProductFixService {
     // ## SAVE만 담당!!!! ##
     public void fix(Product item) {
         File file = new File("products.obj");
-        Map<Long, Product> data = load();
+        Map<Long, Product> data = Utils.load("products.obj");
 
         // ## seq = 상품 등록 번호
         long seq = item.getSeq();

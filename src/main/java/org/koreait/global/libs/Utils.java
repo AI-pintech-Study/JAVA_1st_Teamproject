@@ -293,6 +293,15 @@ public class Utils {
         return false;
     }
 
+
+    /**
+     * 공통 입력 처리
+     *
+     * @param id
+     * @param password
+     * @return boolean : 유효성 검사. 2개의 객체를 불러와서 ID
+     */
+
     public static boolean getIdCheck(String id, String password)
     {
         LoginInfoService loginInfoService = BeanContainer.getBean(LoginInfoService.class);
@@ -313,15 +322,17 @@ public class Utils {
      *
      * @return
      */
-    public static Map<String, Accession> load() {
-        File file = new File("Accession.obj");
+    public static <K, V> Map<K, V> load(String fileName) {
+        File file = new File(fileName);
         if (file.exists()) {
             try (FileInputStream fis = new FileInputStream(file);
                  ObjectInputStream oos = new ObjectInputStream(fis)) {
-                // ## 상품 목록을 Map형태로 가져옴
-                Map<String, Accession> data = (Map<String, Accession>) oos.readObject();
+                // ## 상품 목록을 Map 형태로 가져옴
+                Map<K, V> data = (Map<K, V>) oos.readObject();
                 return data;
-            } catch (Exception e) {}
+            } catch (Exception e) {
+                e.printStackTrace();  // 예외를 출력하여 디버깅하기 쉽게 합니다.
+            }
         }
 
         return new HashMap<>();

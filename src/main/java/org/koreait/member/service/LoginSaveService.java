@@ -22,7 +22,7 @@ public class LoginSaveService {
     // ## SAVE만 담당!!!! ##
     public void save(Accession item, boolean fix) {
         File file = new File("Accession.obj");
-        Map<String, Accession> data = Utils.load(); // 회원 정보 가져오기 -> Map 형태. key = value
+        Map<String, Accession> data = Utils.load("Accession.obj"); // 회원 정보 가져오기 -> Map 형태. key = value
 
         LoginInfoService service = BeanContainer.getBean(LoginInfoService.class); // LoginInfo 객체 가져오기 -> 싱글톤
 

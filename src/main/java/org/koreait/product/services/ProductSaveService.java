@@ -1,5 +1,6 @@
 package org.koreait.product.services;
 
+import org.koreait.global.libs.Utils;
 import org.koreait.product.entities.Product;
 
 import java.io.*;
@@ -24,7 +25,7 @@ public class ProductSaveService {
     // ## SAVE만 담당!!!! ##
     public void save(Product item) {
         File file = new File("products.obj");
-        Map<Long, Product> data = load();
+        Map<Long, Product> data = Utils.load("products.obj");
 
         // ## seq = 상품 등록 번호
         long seq = item.getSeq();
@@ -53,24 +54,5 @@ public class ProductSaveService {
             oos.writeObject(data);
 
         } catch (IOException e) {}
-    }
-
-    /**
-     * 상품 정보 목록 파일에서 로드
-     *
-     * @return
-     */
-    private Map<Long, Product> load() {
-        File file = new File("products.obj");
-        if (file.exists()) {
-            try (FileInputStream fis = new FileInputStream(file);
-                 ObjectInputStream oos = new ObjectInputStream(fis)) {
-                // ## 상품 목록을 Map형태로 가져옴
-                Map<Long, Product> data = (Map<Long, Product>) oos.readObject();
-                return data;
-            } catch (Exception e) {}
-        }
-
-        return new HashMap<>();
     }
 }

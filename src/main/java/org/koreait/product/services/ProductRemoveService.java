@@ -1,6 +1,7 @@
 package org.koreait.product.services;
 
 import org.koreait.global.exceptions.BadRequestException;
+import org.koreait.global.libs.Utils;
 import org.koreait.product.entities.Product;
 
 import java.io.*;
@@ -19,7 +20,7 @@ public class ProductRemoveService {
     // ## SAVE만 담당!!!! ##
     public void remove(long seq) {
         File file = new File("products.obj");
-        Map<Long, Product> data = load(); // 회원 정보 가져오기 -> Map 형태. key = value
+        Map<Long, Product> data = Utils.load("products.obj"); // 회원 정보 가져오기 -> Map 형태. key = value
 
 
         // ## seq = 상품 등록 번호
@@ -38,19 +39,5 @@ public class ProductRemoveService {
         }
 
         throw new BadRequestException();
-    }
-
-    private Map<Long, Product> load() {
-        File file = new File("products.obj");
-        if (file.exists()) {
-            try (FileInputStream fis = new FileInputStream(file);
-                 ObjectInputStream oos = new ObjectInputStream(fis)) {
-                // ## 상품 목록을 Map형태로 가져옴
-                Map<Long, Product> data = (Map<Long, Product>) oos.readObject();
-                return data;
-            } catch (Exception e) {}
-        }
-
-        return new HashMap<>();
     }
 }
