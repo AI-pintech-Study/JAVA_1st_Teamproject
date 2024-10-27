@@ -19,7 +19,6 @@ public class ProductModifyController extends Controller {
 
 
             // 데이터 클래스
-            Scanner sc = Router.sc;
             Product item = (Product) getData();
 
             //함수형 인터페이스 3개(상품명 판매가 재고) 열린 개행

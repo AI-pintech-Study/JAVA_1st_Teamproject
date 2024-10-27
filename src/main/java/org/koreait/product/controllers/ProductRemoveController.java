@@ -27,9 +27,6 @@ public class ProductRemoveController extends Controller {
 
             // 삭제 완료 후 상품 메인메뉴 이동
             Utils.loadController(ProductBranchController.class);
-
-
-
         });
     }
 

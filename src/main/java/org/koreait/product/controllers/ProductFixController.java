@@ -42,9 +42,9 @@ public class ProductFixController extends Controller {
     @Override
     public void view() {
 
-        ProductInfoService infoService = BeanContainer.getBean(ProductInfoService.class);
-        List<Product> items = infoService.getList();
-        Utils.loadTpl(ProductList.class, new Model(items));
+        ProductInfoService infoService = BeanContainer.getBean(ProductInfoService.class); // 싱글톤패턴으로 InfoService 객체 생성
+        List<Product> items = infoService.getList(); // 객체 생성 후 넣어주기
+        Utils.loadTpl(ProductList.class, new Model(items)); // 결과값 출력
 
     }
 }

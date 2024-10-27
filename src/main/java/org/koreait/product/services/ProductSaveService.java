@@ -36,13 +36,10 @@ public class ProductSaveService {
         }
 
         if (data.containsKey(seq)) { // 상품 정보 수정
-                item.setModDt(LocalDateTime.now());
-            }
-
-        else { // 상품 정보 등록
             item.setSeq(seq);
-            item.setRegDt(LocalDateTime.now());
         }
+
+        item.setModDt(LocalDateTime.now());
 
         // put = seq가 있으면 지금 넣는 값으로 수정될거고 없으면 새로 생성될것
         data.put(seq, item);

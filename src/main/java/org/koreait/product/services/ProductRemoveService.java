@@ -20,7 +20,7 @@ public class ProductRemoveService {
     // 삭제만 담당
     public void remove(long seq) {
         File file = new File("products.obj");
-        Map<Long, Product> data = Utils.load("products.obj"); // 회원 정보 가져오기 -> Map 형태. key = value
+        Map<Long, Product> data = Utils.load("products.obj"); // 상품 정보 가져오기 -> Map 형태. key = value
 
 
         // seq = 상품 등록 번호
