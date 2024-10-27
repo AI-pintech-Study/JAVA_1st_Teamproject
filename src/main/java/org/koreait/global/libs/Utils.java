@@ -155,11 +155,13 @@ public class Utils {
      *
      * @param title : 안내 문구
      * @param message : 검증 실패시 안내 문구
+     * @param conditions : 제약조건. kks
      * @return
      */
 
     // ## 검증 실패시 다시 입력하라고 무한 반복 while(true) ##
     // (매개변수들) 그때그때 상황맞게 쓸 수 있게 String title, String message
+    // 제약조건을 확인하며, 상황에 맞게 제약조건을 걸 수 있음. 만약 제약조건이 없으면 input의 제약만 확인함. kks
     public static String getString(String title, String message, List<Predicate<String>> conditions) {
         Scanner sc = Router.sc;
         String input;
@@ -176,7 +178,7 @@ public class Utils {
                // 추가 조건 처리 S
                 if (conditions != null) {
                     for (Predicate<String> predicate : conditions) {
-                        if (!predicate.test(input)) {
+                        if (!predicate.test(input)) { // conditions의 제약을 확인하는 함수. kks
                             isPass = false;
                         }
                     }
@@ -203,10 +205,13 @@ public class Utils {
      * 1) 필수 여부 체크
      * 2) 숫자 형식 체크
      * 
-     * @param title
-     * @param message
+     * @param title : 안내 문구 kks
+     * @param message : 검증 실패시 안내 문구 kks
+     * @param conditions : 제약조건. kks
      * @return
      */
+
+    // getString과 마찬가지로 제약조건을 확인함. kks
     public static long getNumber(String title, String message, List<Predicate<String>> conditions) {
 
         Scanner sc = Router.sc;
@@ -221,7 +226,7 @@ public class Utils {
                 }
                 if (conditions != null) {
                     for (Predicate<String> predicate : conditions) {
-                        if (!predicate.test(input)) {
+                        if (!predicate.test(input)) { // conditions의 제약조건을 확인하는 함수 kks
                             isPass = false;
                         }
                     }
@@ -297,14 +302,14 @@ public class Utils {
     /**
      * 공통 입력 처리
      *
-     * @param id
-     * @param password
-     * @return boolean : 유효성 검사. 2개의 객체를 불러와서 ID
+     * @param id : 유효성 검사 할 ID kks
+     * @param password : 유효성 검사 할 Password kks
+     * @return boolean : 유효성 검사. 2개의 객체를 불러와서 ID 및 password를 체크함. kks
      */
 
     public static boolean getIdCheck(String id, String password)
     {
-        LoginInfoService loginInfoService = BeanContainer.getBean(LoginInfoService.class);
+        LoginInfoService loginInfoService = BeanContainer.getBean(LoginInfoService.class); // 싱글톤 불러오기.
         Accession checkItem = loginInfoService.get(id); // id가 있으면 그 객체 불러옴.
         Accession checkLogin = BeanContainer.getBean(Accession.class); // 객체 복사를 위해 싱글톤패턴으로 생성
 
@@ -318,8 +323,9 @@ public class Utils {
     }
 
     /**
-     * 상품 정보 목록 파일에서 로드
+     * 객체의 파일에서 로드
      *
+     * @param fileName : 로드할 객체 파일.
      * @return
      */
     public static <K, V> Map<K, V> load(String fileName) {

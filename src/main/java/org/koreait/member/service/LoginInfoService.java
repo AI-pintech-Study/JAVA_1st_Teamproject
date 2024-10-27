@@ -1,6 +1,7 @@
 package org.koreait.member.service;
 
 import org.koreait.member.entities.Accession;
+import org.koreait.product.entities.Product;
 import org.koreait.product.exceptions.ProductNotFoundException;
 
 import java.io.File;
@@ -20,18 +21,19 @@ public class LoginInfoService {
      * @return
      */
     public Accession get(String id) { // 
-        List<Accession> items = getList(false);
+        List<Accession> items = getList(false); // getList로 자동정렬 되어있는 회원 목록 가지고 옴.
 
         // ## filter 참고로만 보기
-        Accession item = items.stream().filter(i -> i.getUserId().equals(id)).findFirst().orElse(null);
+        Accession item = items.stream().filter(i -> i.getUserId().equals(id)).findFirst().orElse(null); // Filter 를 이용하여 ID가 맞는 사람이 있는지 Check. 없으면 null로 반환.
 
         return item;
     }
 
+
     /**
      * 전체 목록 가져오기
      *
-     * @param isDesc : false - 기본 상품번호 오름차순으로 기본 정렬, true - 상품번호 기준 내림차순으로 정렬
+     * @param isDesc : false - 기본 회원ID 오름차순으로 기본 정렬, true - 회원ID 기준 내림차순으로 정렬
      * @return
      */
     public List<Accession> getList(boolean isDesc) {

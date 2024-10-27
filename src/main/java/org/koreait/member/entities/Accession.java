@@ -6,14 +6,14 @@ public class Accession implements Serializable {
 
     private final static long serialVersionUID = 1L;
 
-    private String userId;
-    private String userPassword;
-    private String userName;
-    private String userEmail;
-    private long userBirth;
-    private boolean loginCheck;
+    private String userId; // ID
+    private String userPassword; // Password
+    private String userName; // Name
+    private String userEmail; // 이메일
+    private long userBirth; // 생년월일
+    private boolean loginCheck; // 로그인 했는지 안했는지 확인용
 
-    private boolean userAdmin;
+    private boolean userAdmin; // 관리자인지 아닌지 확인용.
 
     public boolean isLoginCheck() {
         return loginCheck;
@@ -83,7 +83,7 @@ public class Accession implements Serializable {
                 '}';
     }
 
-    public void copyFrom(Accession other) {
+    public void copyFrom(Accession other) { // 객체 복사 붙여넣기.
         this.userId = other.userId;
         this.userPassword = other.userPassword;
         this.userName = other.userName;

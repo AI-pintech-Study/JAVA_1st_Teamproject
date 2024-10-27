@@ -22,9 +22,9 @@ public class RealFixController extends Controller {
             Accession item = BeanContainer.getBean(Accession.class);
             Accession fixitem = new Accession(); // 수정되는 정보
 
-            fixitem.copyFrom(item);
+            fixitem.copyFrom(item); // 수정되는 정보에 현재 객체를 데이터 복사.
 
-            String password = Utils.getString("수정 할 비밀번호", "비밀번호를 입력하세요.", List.of(
+            String password = Utils.getString("수정 할 비밀번호", "비밀번호를 입력하세요.", List.of( // 제약조건 확인.
                     input -> {
                         if (input.length() >= 8 && input.length() <= 20) {
                             return true;
@@ -35,7 +35,7 @@ public class RealFixController extends Controller {
             ));
             fixitem.setUserPassword(password);
 
-            String email = Utils.getString("수정 할 Email", "Email을 입력하세요.", List.of(
+            String email = Utils.getString("수정 할 Email", "Email을 입력하세요.", List.of( // 제약조건 확인.
                     input -> {
                         String CheckEmail;
                         if(input.contains("@")) {
@@ -52,12 +52,10 @@ public class RealFixController extends Controller {
             fixitem.setUserEmail(email);
 
             System.out.println("확인중입니다.");
-            // 저장 이후에 상품 목록으로 페이지 이동
 
-            LoginSaveService saveService = BeanContainer.getBean(LoginSaveService.class);
-            saveService.save(fixitem, true);
+            LoginSaveService saveService = BeanContainer.getBean(LoginSaveService.class); // 객체 싱글톤패턴 생성
+            saveService.save(fixitem, true); // 현재 객체 저장.
 
-            // ## 작업 끝난후 다시 상품목록(List)으로 이동 시켜줌 ##
             Utils.loadController(ManagementController.class);
         });
     }
